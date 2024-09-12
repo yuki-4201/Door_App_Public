@@ -17,6 +17,7 @@ Future<void> main() async{
 final supabase = Supabase.instance.client;
 
 class MyApp extends StatelessWidget {
+  // ignore: use_super_parameters
   const MyApp({Key? key}): super(key: key);
   @override
   Widget build(BuildContext context) {
