@@ -4,15 +4,16 @@
 // ignore: unused_import
 import 'dart:async';
 import 'package:flutter/material.dart';
+// ignore: unused_import
+import 'package:login/main.dart';
 import 'package:login/pages/home_page.dart';
 // ignore: unused_import
 import 'package:login/utils/constants.dart';
 // ignore: unused_import
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-/// 他のユーザーとチャットができるページ
-///
-/// `ListView`内にチャットが表示され、下の`TextField`から他のユーザーへチャットを送信できる。
+
+
 class AuthenticationPage extends StatefulWidget {
   // ignore: use_super_parameters
   const AuthenticationPage({Key? key}) : super(key: key);
@@ -25,15 +26,16 @@ class AuthenticationPage extends StatefulWidget {
   State<AuthenticationPage> createState() => AuthenticationPageState();
 }
 class AuthenticationPageState extends State<AuthenticationPage> {
-  // Create a text controller and use it to retrieve the current value 
+  // Create a text controller and use it to retrieve the current value
   // of the TextField.
-  final myController = TextEditingController();
+  final auth_number = TextEditingController();
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed. 
-    myController.dispose(); super.dispose(); 
+    // Clean up the controller when the widget is disposed.
+    auth_number.dispose(); super.dispose();
   }
-  
+  final supabase = Supabase.instance.client;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +56,7 @@ class AuthenticationPageState extends State<AuthenticationPage> {
         ),
         TextFormField(
           keyboardType: TextInputType.number,
-          controller: myController,
+          controller: auth_number,
           decoration: const InputDecoration(
             border: UnderlineInputBorder(),
             labelText: 'Enter number.',
@@ -62,14 +64,25 @@ class AuthenticationPageState extends State<AuthenticationPage> {
         ),
         TextButton.icon(
           onPressed: ()async{
-            await supabase
-              .from('action')
-              .insert({'text': "Unlock" ,"number": myController.text});
-            // ignore: use_build_context_synchronously
+            final message = auth_number.text;
+            final channelB = supabase.channel('admin');
+            channelB.subscribe((status, error) {
+            // Wait for successful connection
+            debugPrint('debug: _SendMessage');
+            if (status != RealtimeSubscribeStatus.subscribed) {
+              return;
+            }
+            // Send a message once the client is subscribed
+            channelB.sendBroadcastMessage(
+              event: 'RequestForUnlocking',
+              payload: {'payload': message},
+            );
+            });
+            print("45");
             Navigator.of(context)
             .pushAndRemoveUntil(HomePage.route(), (route) => false);
             setState((){});
-          }, 
+          },
           icon: const Icon(
             Icons.done,
             color:Colors.blue,

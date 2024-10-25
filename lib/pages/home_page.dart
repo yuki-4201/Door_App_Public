@@ -54,9 +54,20 @@ class HomePageState extends State<HomePage> {
             await supabase
               .from('action')
               .insert({'text': 'Lock','number':424242});
+            final channelB = supabase.channel('admin');
+            channelB.subscribe((status, error) {
+            if (status != RealtimeSubscribeStatus.subscribed) {
+              return;
+            }
+            // Send a message once the client is subscribed
+            channelB.sendBroadcastMessage(
+              event: 'RequestForLocking',
+              payload: {'payload': 424242},
+            );
+            });
             Door = 'Door is Locked.';
             setState((){});
-          }, 
+          },
           icon: const Icon(
             Icons.lock,
             color:Colors.pink,
