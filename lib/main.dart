@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Kenryo_lab_system',
-      home: LoginPage(), 
+      home: LoginPage(),
     );
   }
 }
