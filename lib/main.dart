@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Kenryo_lab_system',
+      title: 'Kenryo_Lab_System',
       home: LoginPage(),
     );
   }

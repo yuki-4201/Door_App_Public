@@ -1,5 +1,5 @@
 // ignore: unused_import
-// ignore_for_file: unused_field, sort_child_properties_last
+// ignore_for_file: unused_field, sort_child_properties_last, prefer_const_constructors, unused_import, duplicate_ignore
 
 // ignore: unused_import
 import 'dart:async';
@@ -12,8 +12,6 @@ import 'package:login/utils/constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 // ignore: unused_import
 import 'package:login/pages/authentication_page.dart';
-// ignore: unused_import
-import 'package:login/pages/pass_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// 他のユーザーとチャットができるページ
@@ -29,6 +27,43 @@ class HidePage extends StatefulWidget {
   }
   @override
   State<HidePage> createState() => HidePageState();
+}
+
+class AlertDialogSample extends StatelessWidget {
+  const AlertDialogSample({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('解錠してもいいですか？'),
+      content: Text('学校外で解錠操作を行なっていませんか？'),
+      actions: <Widget>[
+        ElevatedButton(
+          child: Text('解錠しない'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        ElevatedButton(
+          child: Text('解錠する'),
+          onPressed: () async {
+            final channelB = supabase.channel('admin');
+            channelB.subscribe((status, error) {
+            if (status != RealtimeSubscribeStatus.subscribed) {
+              return;
+            }
+            // Send a message once the client is subscribed
+            channelB.sendBroadcastMessage(
+              event: 'RequestForUnlocking',
+              payload: {'payload': 9999, 'user':'teacher'},
+            );
+            Navigator.of(context).pop();
+            });
+          },
+        )
+      ],
+    );
+  }
 }
 
 class HidePageState extends State<HidePage> {
@@ -47,7 +82,7 @@ class HidePageState extends State<HidePage> {
       appBar: AppBar(
         title: const Row(children: [
             Icon(Icons.sensor_door),
-            Text("Kenryo Lab application")
+            Text("Kenryo Lab Application")
         ]),
       ),
       drawer: Drawer(
@@ -63,12 +98,6 @@ class HidePageState extends State<HidePage> {
               ),
             ),
           ),
-        ),
-        ListTile(
-          title: Text('HomePage'),
-          onTap: () => {Navigator.of(context)
-            .pushAndRemoveUntil(HomePage.route(), (route) => false)
-          },
         ),
         ListTile(
           title: Text('TeacherPage'),
@@ -150,18 +179,12 @@ class HidePageState extends State<HidePage> {
             await supabase
               .from('action')
               .insert({'text': 'Lock','number':565656});
-            final channelB = supabase.channel('admin');
-            channelB.subscribe((status, error) {
-            if (status != RealtimeSubscribeStatus.subscribed) {
-              return;
-            }
-            // Send a message once the client is subscribed
-            channelB.sendBroadcastMessage(
-              event: 'RequestForUnlocking',
-              payload: {'payload': 9999, 'user':'teacher'},
-            );
+            showDialog<void>(
+            context: context,
+            builder: (_) {
+              return AlertDialogSample();
             });
-            Door = 'Door is Unlocked.';
+            Door = 'Finish Action.';
             setState((){});
           },
           icon: const Icon(

@@ -6,6 +6,7 @@
         "geolocator",
         "Iiwicm",
         "Kenryo",
+        "Kenyro",
         "Menters",
         "NDYs",
         "Schyler",
@@ -14,5 +15,6 @@
         "XVCJ",
         "ZSIs"
     ],
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "cmake.sourceDirectory": "/Users/yuki/development/VScode/kenryo_lab/linux"
 }
