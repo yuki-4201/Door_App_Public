@@ -37,8 +37,6 @@ class _RegisterPageState extends State<RegisterPage> {
     try {
       await supabase.auth.signUp(
           email: email, password: password, data: {'username': username});
-      // チャットページ実装後に下記コードを追加
-      // Navigator.of(context)
       //     .pushAndRemoveUntil(ChatPage.route(), (route) => false);
     } on AuthException catch (error) {
       // ignore: use_build_context_synchronously
@@ -68,8 +66,9 @@ class _RegisterPageState extends State<RegisterPage> {
               validator: (val) {
                 if (val == null || val.isEmpty) {
                   return '必須';
-                }
-                return null;
+                }else if (!val.endsWith('@kenryo.ed.jp')){
+                  return 'kenryo.ed.jpのメールアドレスを入力してください';
+                }return null;
               },
               keyboardType: TextInputType.emailAddress,
             ),
@@ -91,34 +90,18 @@ class _RegisterPageState extends State<RegisterPage> {
               },
             ),
             formSpacer,
-            TextFormField(
-              controller: _usernameController,
-              decoration: const InputDecoration(
-                label: Text('ユーザー名'),
-              ),
-              validator: (val) {
-                if (val == null || val.isEmpty) {
-                  return '必須';
-                }
-                final isValid = RegExp(r'^[A-Za-z0-9_]{3,24}$').hasMatch(val);
-                if (!isValid) {
-                  return '3~24文字のアルファベットか文字で入力してください';
-                }
-                return null;
-              },
-            ),
-            formSpacer,
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: _isLoading ? null : _signUp,
-              child: const Text('登録'),
+              label: const Text('登録'),
+              icon: const Icon(Icons.how_to_reg),
             ),
             formSpacer,
-            TextButton(
+            ElevatedButton.icon(
               onPressed: () {
-                //ログインページが実装できたらコメントを外す
                 Navigator.of(context).push(LoginPage.route());
               },
-              child: const Text('すでにアカウントをお持ちの方はこちら'),
+              label: const Text('すでにアカウントをお持ちの方はこちら'),
+              icon: const Icon(Icons.login),
             )
           ],
         ),

@@ -1,5 +1,5 @@
 // ignore: unused_import
-// ignore_for_file: unused_field
+// ignore_for_file: unused_field, avoid_print, non_constant_identifier_names
 
 // ignore: unused_import
 import 'dart:async';
@@ -42,7 +42,7 @@ class AuthenticationPageState extends State<AuthenticationPage> {
       appBar: AppBar(
         title: const Row(children: [
             Icon(Icons.sensor_door),
-            Text("Kenryo Lab application")
+            Text("Kenryo Lab Application")
         ]),
       ),
       body: Column(

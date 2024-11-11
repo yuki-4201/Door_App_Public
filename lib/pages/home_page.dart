@@ -1,5 +1,5 @@
 // ignore: unused_import
-// ignore_for_file: unused_field, sort_child_properties_last
+// ignore_for_file: unused_field, sort_child_properties_last, prefer_const_constructors
 
 // ignore: unused_import
 import 'dart:async';
@@ -11,8 +11,6 @@ import 'package:login/utils/constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 // ignore: unused_import
 import 'package:login/pages/authentication_page.dart';
-// ignore: unused_import
-import 'package:login/pages/pass_page.dart';
 
 /// 他のユーザーとチャットができるページ
 ///
@@ -45,7 +43,7 @@ class HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Row(children: [
             Icon(Icons.sensor_door),
-            Text("Kenryo Lab application")
+            Text("Kenryo Lab Application")
         ]),
       ),
       drawer: Drawer(
@@ -61,12 +59,6 @@ class HomePageState extends State<HomePage> {
               ),
             ),
           ),
-        ),
-        ListTile(
-          title: Text('大塚専用ページ'),
-          onTap: () => {Navigator.of(context)
-            .pushAndRemoveUntil(PassPage.route(), (route) => false)
-          },
         ),
         ListTile(
           title: Text('Logout'),
@@ -147,7 +139,7 @@ class HomePageState extends State<HomePage> {
           child: const Text("made by Kenryo Physics and Chemistry Club")
         ),
       ],),
-      floatingActionButton: 
+      floatingActionButton:
         FloatingActionButton(
         onPressed: () => {Navigator.of(context)
           .pushAndRemoveUntil(LoginPage.route(), (route) => false)
