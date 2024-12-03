@@ -43,7 +43,7 @@ class HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Row(children: [
             Icon(Icons.sensor_door),
-            Text("Kenryo Lab Application")
+            Text("KENRYO STEAM LAB.")
         ]),
       ),
       drawer: Drawer(
@@ -136,7 +136,7 @@ class HomePageState extends State<HomePage> {
         Container(
           alignment: Alignment.bottomCenter,
           width: double.infinity,
-          child: const Text("made by Kenryo Physics and Chemistry Club")
+          child: const Text("Made By Hinata Misawa, Kotaro Otsuka in 2024 ©")
         ),
       ],),
       floatingActionButton:
