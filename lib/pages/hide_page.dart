@@ -82,7 +82,7 @@ class HidePageState extends State<HidePage> {
       appBar: AppBar(
         title: const Row(children: [
             Icon(Icons.sensor_door),
-            Text("Kenryo Lab Application")
+            Text("KERYO STEAM LAB.")
         ]),
       ),
       drawer: Drawer(
@@ -100,7 +100,7 @@ class HidePageState extends State<HidePage> {
           ),
         ),
         ListTile(
-          title: Text('TeacherPage'),
+          title: Text('Administrator'),
           onTap: () => {Navigator.of(context)
             .pushAndRemoveUntil(HidePage.route(), (route) => false)
           },
@@ -214,7 +214,7 @@ class HidePageState extends State<HidePage> {
         Container(
           alignment: Alignment.bottomCenter,
           width: double.infinity,
-          child: const Text("made by Kenryo Physics and Chemistry Club")
+          child: const Text("Made By Hinata Misawa, Kotaro Otsuka in 2024 ©")
         ),
       ],),
       floatingActionButton:
