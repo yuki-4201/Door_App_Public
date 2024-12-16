@@ -59,9 +59,9 @@ class LoginPageState extends State<LoginPage> {
       DateTime now = DateTime.now();
       // 今年の西暦を取得
       int thisYear = now.year;
-      int nextYear = thisYear + 1;
-      int lastYear = thisYear - 1;
-      int secondYear = thisYear + 2;
+      int nextYear = thisYear - 1;
+      int lastYear = thisYear - 2;
+      int secondYear = thisYear - 3;
       // Navigate to home page
       // ignore: use_build_context_synchronously
       if(_emailController.text.endsWith(lastYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(thisYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(nextYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(secondYear.toString() +"@kenryo.ed.jp")){
