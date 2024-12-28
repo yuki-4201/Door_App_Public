@@ -1,16 +1,10 @@
-# login
+# Door_App_Public
 
-A new Flutter project.
+  このwebアプリは長野県松本あがたが丘高等学校に従来のシリンダー錠を使ったスマートロックシステムを開発する過程にて作成された、鍵の操作を行うためのものである。このアプリはSupabaseを用いている。
+  詳細については下記のNoteを参照すること。
 
-## Getting Started
+  This web application was created for Matsumoto Agatagaoka High School in Nagano, Japan, in the process of developing a smart lock system using conventional cylinder locks. The application uses Supabase.
+  See blog below for more details.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  https://note.com/haruka4201/m/m16ec9b590555
+ 
