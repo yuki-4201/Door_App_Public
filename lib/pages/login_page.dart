@@ -67,7 +67,7 @@ class LoginPageState extends State<LoginPage> {
       if(_emailController.text.endsWith(lastYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(thisYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(nextYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(secondYear.toString() +"@kenryo.ed.jp")){
         Navigator.of(context)
           .pushAndRemoveUntil(HomePage.route(), (route) => false);
-      }else if(_emailController.text.endsWith("@kenryo.ed.jp") || _emailController.text == "test@test.com"){
+      }else if(_emailController.text.endsWith("@kenryo.ed.jp")){
         Navigator.of(context)
           .pushAndRemoveUntil(HidePage.route(), (route) => false);
       }else{
