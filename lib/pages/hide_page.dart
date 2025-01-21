@@ -28,49 +28,43 @@ class HidePage extends StatefulWidget {
   @override
   State<HidePage> createState() => HidePageState();
 }
-class AlertDialogSample extends StatefulWidget {
-  final String myUserId;
 
-  const AlertDialogSample({Key? key, required this.myUserId}) : super(key: key);
-
-  @override
-  _AlertDialogSampleState createState() => _AlertDialogSampleState();
-}
-
-class _AlertDialogSample extends State<AlertDialogSample> {
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('解錠してもいいですか？'),
-      content: Text('学校外で解錠操作を行なっていませんか？'),
-      actions: <Widget>[
-        ElevatedButton(
-          child: Text('解錠しない'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        ElevatedButton(
-          child: Text('解錠する'),
-          onPressed: () async {
-            await supabase;
-            final channelB = supabase.channel('admin');
-            channelB.subscribe((status, error) {
-            if (status != RealtimeSubscribeStatus.subscribed) {
-              return;
-            }
-            // Send a message once the client is subscribed
-            channelB.sendBroadcastMessage(
-              event: 'RequestForUnlocking',
-              payload: {'payload': 9999, 'user':myUserId},
-            );
-            Navigator.of(context).pop();
-            });
-          },
-        )
-      ],
-    );
-  }
+class AlertDialogSample extends StatelessWidget{
+  final myUserId = supabase.auth.currentUser!.email;
+  const AlertDialogSample({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('解錠してもいいですか？'),
+      content: Text('学校外で解錠操作を行なっていませんか？'),
+      actions: <Widget>[
+        ElevatedButton(
+          child: Text('解錠しない'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        ElevatedButton(
+          child: Text('解錠する'),
+          onPressed: () async {
+            await supabase;
+            final channelB = supabase.channel('admin');
+            channelB.subscribe((status, error) {
+            if (status != RealtimeSubscribeStatus.subscribed) {
+              return;
+            }
+            // Send a message once the client is subscribed
+            channelB.sendBroadcastMessage(
+              event: 'RequestForUnlocking',
+              payload: {'payload': 9999, 'user':myUserId},
+            );
+            Navigator.of(context).pop();
+            });
+          },
+        )
+      ],
+    );
+  }
 }
 
 class HidePageState extends State<HidePage> {
