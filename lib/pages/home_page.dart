@@ -28,6 +28,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  final myUserId = supabase.auth.currentUser!.id;
   // ignore: non_constant_identifier_names
   String Door = "Select the operation.";
   int _counter = 0;
@@ -89,7 +90,7 @@ class HomePageState extends State<HomePage> {
             // Send a message once the client is subscribed
             channelB.sendBroadcastMessage(
               event: 'RequestForLocking',
-              payload: {'payload': 424242, 'user':'student'},
+              payload: {'payload': 424242, 'user':myUserId},
             );
             });
             Door = 'Door is Locked.';
