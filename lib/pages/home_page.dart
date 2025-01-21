@@ -72,6 +72,11 @@ class HomePageState extends State<HomePage> {
       body: Column(
         mainAxisAlignment : MainAxisAlignment.center,
         children: <Widget>[
+        Text("Student page",
+          style: const TextStyle(
+            fontSize: 35,
+            color: Colors.blue
+          ),
         TextButton.icon(
           onPressed: ()async{
             await supabase
