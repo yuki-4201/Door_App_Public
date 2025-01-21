@@ -81,8 +81,6 @@ class HomePageState extends State<HomePage> {
         TextButton.icon(
           onPressed: ()async{
             await supabase
-              .from('action')
-              .insert({'text': 'Lock','number':424242});
             final channelB = supabase.channel('admin');
             channelB.subscribe((status, error) {
             if (status != RealtimeSubscribeStatus.subscribed) {
