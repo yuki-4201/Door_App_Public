@@ -32,6 +32,13 @@ class AuthenticationPageState extends State<AuthenticationPage> {
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final auth_number = TextEditingController();
+  late String myUserId;
+
+  @override
+  void initState() {
+    super.initState();
+    myUserId = widget.data; // 受け取ったデータを myUserId に代入
+  }
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
