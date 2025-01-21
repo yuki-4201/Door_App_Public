@@ -59,6 +59,7 @@ class LoginPageState extends State<LoginPage> {
       await storage.write(key: 'password', value: _passwordController.text);
       DateTime now = DateTime.now();
       // 今年の西暦を取得
+      int thisYear = now.year;
       int month = now.month;
       if (month <= 3){
         int thisYear = now.year - 1;
