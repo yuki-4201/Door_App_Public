@@ -91,7 +91,8 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             formSpacer,
             ElevatedButton.icon(
-              onPressed: (){_isLoading ? null : _signUp;context.showErrorSnackBar(message: "メールを送信しました。");},
+              onPressed: (){_isLoading ? null : _signUp;
+                            context.showErrorSnackBar(message: "メールを送信しました。");},
               label: const Text('登録'),
               icon: const Icon(Icons.how_to_reg),
             ),
