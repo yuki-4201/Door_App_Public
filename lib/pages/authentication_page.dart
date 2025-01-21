@@ -43,8 +43,8 @@ class AuthenticationPageState extends State<AuthenticationPage> {
   @override
   Widget build(BuildContext context) {
     final Map? arguments = ModalRoute.of(context)?.settings.arguments as Map?;
-    if (arguments != null && arguments.containsKey('userId')) {
-      myUserId = arguments['userId'] as String; 
+    if (arguments != null && arguments.containsKey('myUserId')) {
+      myUserId = arguments['myUserId'] as String; 
     }
 
     return Scaffold(
