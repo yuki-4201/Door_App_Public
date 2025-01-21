@@ -74,7 +74,7 @@ class LoginPageState extends State<LoginPage> {
           .pushAndRemoveUntil(HomePage.route(), (route) => false);
       }else if(_emailController.text.endsWith(lastYear.toString() + "@kenryo.ed.jp")){
         context.showErrorSnackBar(message: "卒業生のアカウントは使用できません。");
-      }else if(regex(_emailController.text)){
+      }else if(regex(_emailController.text.endsWith("@kenryo.ed.jp")){
         Navigator.of(context)
           .pushAndRemoveUntil(HidePage.route(), (route) => false);
       }else{
