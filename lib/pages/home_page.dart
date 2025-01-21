@@ -62,6 +62,27 @@ class HomePageState extends State<HomePage> {
           ),
         ),
         ListTile(
+          title: const Text('KenyroHP'),
+          onTap: (){
+            final url = Uri.parse('https://kenryo.ed.jp');
+            launchUrl(url);
+          },
+        ),
+        ListTile(
+          title: const Text('KenryoArchive(App)'),
+          onTap: (){
+            final url = Uri.parse('https://apps.apple.com/jp/app/%E7%B8%A3%E9%99%B5%E6%8E%A2%E7%A9%B6%E3%82%A2%E3%83%BC%E3%82%AB%E3%82%A4%E3%83%96/id6738385612');
+            launchUrl(url);
+          },
+        ),
+        ListTile(
+          title: const Text('KenryoArchive(Google Drive)'),
+          onTap: (){
+            final url = Uri.parse('https://drive.google.com/drive/folders/0AG2mAiSF-9WuUk9PVA');
+            launchUrl(url);
+          },
+        ),
+        ListTile(
           title: Text('Logout'),
           onTap: () => {Navigator.of(context)
           .pushAndRemoveUntil(LoginPage.route(), (route) => false)
