@@ -25,27 +25,20 @@ class AuthenticationPage extends StatefulWidget {
   @override
   State<AuthenticationPage> createState() => AuthenticationPageState();
 }
-
 class AuthenticationPageState extends State<AuthenticationPage> {
-  String myUserId;
+  final myUserId = supabase.auth.currentUser!.email;
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final auth_number = TextEditingController();
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    auth_number.dispose(); 
-    super.dispose();
+    auth_number.dispose(); super.dispose();
   }
   final supabase = Supabase.instance.client;
 
   @override
   Widget build(BuildContext context) {
-    final Map? arguments = ModalRoute.of(context)?.settings.arguments as Map?;
-    if (arguments != null && arguments.containsKey('myUserId')) {
-      myUserId = arguments['myUserId'] as String; 
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Row(children: [
