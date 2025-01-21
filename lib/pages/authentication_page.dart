@@ -35,12 +35,18 @@ class AuthenticationPageState extends State<AuthenticationPage> {
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    auth_number.dispose(); super.dispose();
+    auth_number.dispose(); 
+    super.dispose();
   }
   final supabase = Supabase.instance.client;
 
   @override
   Widget build(BuildContext context) {
+    final Map? arguments = ModalRoute.of(context)?.settings.arguments as Map?;
+    if (arguments != null && arguments.containsKey('userId')) {
+      myUserId = arguments['userId'] as String; 
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Row(children: [
