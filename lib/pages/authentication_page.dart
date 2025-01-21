@@ -15,13 +15,16 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 
 class AuthenticationPage extends StatefulWidget {
-  // ignore: use_super_parameters
-  const AuthenticationPage({Key? key}) : super(key: key);
-  static Route<void> route() {
+  final String data;
+
+  const AuthenticationPage({Key? key, required this.data}) : super(key: key);
+
+  static Route<void> route({required String data}) {
     return MaterialPageRoute(
-      builder: (context) => const AuthenticationPage(),
+      builder: (context) => AuthenticationPage(data: data),
     );
   }
+
   @override
   State<AuthenticationPage> createState() => AuthenticationPageState();
 }
