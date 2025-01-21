@@ -26,7 +26,7 @@ class AuthenticationPage extends StatefulWidget {
   State<AuthenticationPage> createState() => AuthenticationPageState();
 }
 class AuthenticationPageState extends State<AuthenticationPage> {
-  final _emailController = TextEditingController();
+  final myUserId = supabase.auth.currentUser!.email;
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final auth_number = TextEditingController();
