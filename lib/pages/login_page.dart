@@ -61,13 +61,12 @@ class LoginPageState extends State<LoginPage> {
       // 今年の西暦を取得
       int thisYear = now.year;
       int month = now.month;
+      if(month <= 3){
+        thisYear -= 1;
+      }
       int secondYear = thisYear  - 1;
       int thirdYear = thisYear - 2;
       int lastYear = thisYear - 3;
-      RegExp regex = RegExp(r"^[^@]+(\d{" + lastYear.length + "})@kenryo\.ed\.jp$");
-      regex = regex.replaceFirstMapped(RegExp(r"\d{" + lastYear.length + "}"), (Match match) {
-        return r"[1-9]\d{0," + (lastYear.length - 1) + "}|\d{" + (lastYear.length - 1) + "}";
-      });
       // Navigate to home page
       // ignore: use_build_context_synchronously
       if(_emailController.text.endsWith(thisYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(secondYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(thirdYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(secondYear.toString() +"@kenryo.ed.jp")){
