@@ -78,7 +78,7 @@ class LoginPageState extends State<LoginPage> {
         if (email.endsWith(thisYear.toString() + "@kenryo.ed.jp") || email.endsWith(secondYear.toString() + "@kenryo.ed.jp") || email.endsWith(thirdYear.toString() + "@kenryo.ed.jp")) {
             Navigator.of(context)
               .pushAndRemoveUntil(HomePage.route(), (route) => false);
-        }else if (year < lastYear) {  
+        }else(year < lastYear) {  
           context.showErrorSnackBar(message: "卒業生のアカウントは使用できません。");
         }
       }else if(_emailController.text.endsWith("@kenryo.ed.jp")){
