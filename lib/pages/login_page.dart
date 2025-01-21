@@ -73,7 +73,7 @@ class LoginPageState extends State<LoginPage> {
       
       // Navigate to home page
       // ignore: use_build_context_synchronously
-      if(regex.firstMatch(email)){
+      if(match != null){
         final year = int.parse(match.group(1)!);
         if (email.endsWith(thisYear.toString() + "@kenryo.ed.jp") || email.endsWith(secondYear.toString() + "@kenryo.ed.jp") || email.endsWith(thirdYear.toString() + "@kenryo.ed.jp")) {
             Navigator.of(context)
