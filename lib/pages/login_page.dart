@@ -67,13 +67,20 @@ class LoginPageState extends State<LoginPage> {
       int secondYear = thisYear  - 1;
       int thirdYear = thisYear - 2;
       int lastYear = thisYear - 3;
+      final email = _emailController.text;
+      final regex = RegExp(r'(\d{4})@kenryo\.ed\.jp$');
+      final match = regex.firstMatch(email);
+      
       // Navigate to home page
       // ignore: use_build_context_synchronously
-      if(_emailController.text.endsWith(thisYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(secondYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(thirdYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(secondYear.toString() +"@kenryo.ed.jp")){
-        Navigator.of(context)
-          .pushAndRemoveUntil(HomePage.route(), (route) => false);
-      }else if(_emailController.text.endsWith(lastYear.toString() + "@kenryo.ed.jp")){
-        context.showErrorSnackBar(message: "卒業生のアカウントは使用できません。");
+      if(regex.firstMatch(email)){
+        final year = int.parse(match.group(1)!);
+        if (email.endsWith(thisYear.toString() + "@kenryo.ed.jp") || email.endsWith(secondYear.toString() + "@kenryo.ed.jp") || email.endsWith(thirdYear.toString() + "@kenryo.ed.jp")) {
+            Navigator.of(context)
+              .pushAndRemoveUntil(HomePage.route(), (route) => false);
+        }else if (year < lastYear) {  
+          context.showErrorSnackBar(message: "卒業生のアカウントは使用できません。");
+        }
       }else if(_emailController.text.endsWith("@kenryo.ed.jp")){
         Navigator.of(context)
           .pushAndRemoveUntil(HidePage.route(), (route) => false);
