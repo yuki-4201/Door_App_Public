@@ -111,7 +111,7 @@ class HomePageState extends State<HomePage> {
             Navigator.of(context).pushNamed(
               AuthenticationPage.routeName,
               arguments: {
-                'userData': userData,
+                'userData': myUserId,
               },
             );
           },
