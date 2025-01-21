@@ -81,7 +81,7 @@ class HomePageState extends State<HomePage> {
         ),
         TextButton.icon(
           onPressed: ()async{
-            await supabase
+            await supabase;
             final channelB = supabase.channel('admin');
             channelB.subscribe((status, error) {
             if (status != RealtimeSubscribeStatus.subscribed) {
