@@ -63,13 +63,6 @@ class HomePageState extends State<HomePage> {
           ),
         ),
         ListTile(
-          title: const Text('Log_Search'),
-          onTap: (){
-            final url = Uri.parse('https://docs.google.com/spreadsheets/d/1ZOGaawYWA1fQg_ULgRasc-IO_01mwRQ4vZedu4WeAA8/edit?gid=1834174406#gid=1834174406');
-            launchUrl(url);
-          },
-        ),
-        ListTile(
           title: const Text('KenyroHP'),
           onTap: (){
             final url = Uri.parse('https://kenryo.ed.jp');
