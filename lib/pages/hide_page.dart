@@ -30,7 +30,6 @@ class HidePage extends StatefulWidget {
 }
 
 class AlertDialogSample extends StatelessWidget{
-  final myUserId = supabase.auth.currentUser!.email;
   const AlertDialogSample({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -176,12 +175,19 @@ class HidePageState extends State<HidePage> {
         ),
         TextButton.icon(
           onPressed: ()async{
-            showDialog<void>(
-            context: context,
-            builder: (_) {
-              return AlertDialogSample(myUserId);
+            await supabase;
+            final channelB = supabase.channel('admin');
+            channelB.subscribe((status, error) {
+            if (status != RealtimeSubscribeStatus.subscribed) {
+              return;
+            }
+            // Send a message once the client is subscribed
+            channelB.sendBroadcastMessage(
+              event: 'RequestForUnlocking',
+              payload: {'payload': 9999, 'user':myUserId},
+            );
             });
-            Door = 'Finish Action.';
+            Door = 'Door is Unlocked.';
             setState((){});
           },
           icon: const Icon(
