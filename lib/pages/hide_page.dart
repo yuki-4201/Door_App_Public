@@ -148,7 +148,6 @@ class HidePageState extends State<HidePage> {
         const SizedBox(height: 30),
         TextButton.icon(
           onPressed: ()async{
-            await supabase
             final channelB = supabase.channel('admin');
             channelB.subscribe((status, error) {
             if (status != RealtimeSubscribeStatus.subscribed) {
@@ -175,7 +174,6 @@ class HidePageState extends State<HidePage> {
         ),
         TextButton.icon(
           onPressed: ()async{
-            await supabase
             showDialog<void>(
             context: context,
             builder: (_) {
