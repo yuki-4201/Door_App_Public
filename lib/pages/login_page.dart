@@ -59,15 +59,24 @@ class LoginPageState extends State<LoginPage> {
       await storage.write(key: 'password', value: _passwordController.text);
       DateTime now = DateTime.now();
       // 今年の西暦を取得
-      int thisYear = now.year;
-      int nextYear = thisYear - 1;
-      int lastYear = thisYear - 2;
-      int secondYear = thisYear - 3;
+      int month = now.month;
+      if (month <= 3){
+        int thisYear = now.year - 1;
+      }else{
+        int thisYear = now.year;
+      }
+      int secondYear = thisYear  - 1;
+      int thirdYear = thisYear - 2;
+      int lasYear = thisYear - 3;
+      pattern = r"^[2010-f{"lasYear"}]$"
       // Navigate to home page
       // ignore: use_build_context_synchronously
-      if(_emailController.text.endsWith(lastYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(thisYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(nextYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(secondYear.toString() +"@kenryo.ed.jp")){
+      if(_emailController.text.endsWith(thisYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(secondYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(thirdYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(secondYear.toString() +"@kenryo.ed.jp")){
         Navigator.of(context)
           .pushAndRemoveUntil(HomePage.route(), (route) => false);
+      }else if(_emailController.text.endsWith(lastYear.toString() + "@kenryo.ed.jp")){
+        Navigator.of(context)
+          .pushAndRemoveUntil(HidePage.route(), (route) => false);
       }else if(_emailController.text.endsWith("@kenryo.ed.jp")){
         Navigator.of(context)
           .pushAndRemoveUntil(HidePage.route(), (route) => false);
