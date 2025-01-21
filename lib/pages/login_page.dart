@@ -9,6 +9,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:login/pages/home_page.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:login/pages/hide_page.dart';
+import 'package:login/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   // ignore: use_super_parameters
@@ -118,6 +119,13 @@ class LoginPageState extends State<LoginPage> {
             label: const Text('ログイン'),
             icon: const Icon(Icons.login),
           ),
+          ElevatedButton.icon(
+              onPressed: () {
+                Navigator.of(context).push(RegisterPage.route());
+              },
+              label: const Text('登録'),
+              icon: const Icon(Icons.login),
+          )
         ],
       ),
     );
