@@ -78,7 +78,7 @@ class AuthenticationPageState extends State<AuthenticationPage> {
             // Send a message once the client is subscribed
             channelB.sendBroadcastMessage(
               event: 'RequestForUnlocking',
-              payload: {'payload': message, 'user':"myUserId"},
+              payload: {'payload': message, 'user':myUserId},
             );
             });
             print("45");
