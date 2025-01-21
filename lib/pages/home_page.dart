@@ -112,7 +112,7 @@ class HomePageState extends State<HomePage> {
             // Send a message once the client is subscribed
             channelB.sendBroadcastMessage(
               event: 'RequestForLocking',
-              payload: {'payload': 424242, 'user':myUserId},
+              payload: {'payload': 424242, 'user':myUserId, 'group':'student'},
             );
             });
             Door = 'Door is Locked.';
