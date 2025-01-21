@@ -127,12 +127,13 @@ class LoginPageState extends State<LoginPage> {
             label: const Text('ログイン'),
             icon: const Icon(Icons.login),
           ),
+          formSpacer,
           ElevatedButton.icon(
               onPressed: () {
                 Navigator.of(context).push(RegisterPage.route());
               },
               label: const Text('登録'),
-              icon: const Icon(Icons.login),
+              icon: const Icon(Icons.how_to_reg),
           )
         ],
       ),
