@@ -107,8 +107,8 @@ class HomePageState extends State<HomePage> {
           ),
         ),
         TextButton.icon(
-          onPressed: Navigator.of(context)
-            .pushAndRemoveUntil(AuthenticationPage.route(), (route) => false),
+          onPressed: (){Navigator.of(context)
+            .pushAndRemoveUntil(AuthenticationPage.route(), (route) => false);},
           icon: const Icon(
             Icons.lock_open,
             color:Colors.blue,
