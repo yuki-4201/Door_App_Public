@@ -121,7 +121,7 @@ class HidePageState extends State<HidePage> {
             // Send a message once the client is subscribed
             channelB.sendBroadcastMessage(
               event: 'RequestForLocking',
-              payload: {'payload': 424242, 'user':myUserId},
+              payload: {'payload': 424242, 'user':myUserId, 'group':'teacher'},
             );
             });
             Door = 'Door is Locked.';
@@ -148,7 +148,7 @@ class HidePageState extends State<HidePage> {
             // Send a message once the client is subscribed
             channelB.sendBroadcastMessage(
               event: 'RequestForUnlocking',
-              payload: {'payload': 9999, 'user':myUserId},
+              payload: {'payload': 9999, 'user':myUserId, 'group':'teacher'},
             );
             });
             Door = 'Door is Unlocked.';
