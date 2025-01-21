@@ -108,11 +108,13 @@ class HomePageState extends State<HomePage> {
         ),
         TextButton.icon(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AuthenticationPage(myUserId)),
+            Navigator.of(context).pushNamed(
+              AuthenticationPage.routeName,
+              arguments: {
+                'userData': userData,
+              },
             );
-          };
+          },
           icon: const Icon(
             Icons.lock_open,
             color:Colors.blue,
