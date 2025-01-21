@@ -30,6 +30,7 @@ class HidePage extends StatefulWidget {
 }
 
 class AlertDialogSample extends StatelessWidget {
+  final myUserId = supabase.auth.currentUser!.email;
   const AlertDialogSample({Key? key}) : super(key: key);
 
   @override
@@ -55,7 +56,7 @@ class AlertDialogSample extends StatelessWidget {
             // Send a message once the client is subscribed
             channelB.sendBroadcastMessage(
               event: 'RequestForUnlocking',
-              payload: {'payload': 9999, 'user':'teacher'},
+              payload: {'payload': 9999, 'user':myUserId},
             );
             Navigator.of(context).pop();
             });
@@ -148,8 +149,6 @@ class HidePageState extends State<HidePage> {
         TextButton.icon(
           onPressed: ()async{
             await supabase
-              .from('action')
-              .insert({'text': 'Lock','number':424242});
             final channelB = supabase.channel('admin');
             channelB.subscribe((status, error) {
             if (status != RealtimeSubscribeStatus.subscribed) {
@@ -158,7 +157,7 @@ class HidePageState extends State<HidePage> {
             // Send a message once the client is subscribed
             channelB.sendBroadcastMessage(
               event: 'RequestForLocking',
-              payload: {'payload': 424242, 'user':'teacher'},
+              payload: {'payload': 424242, 'user':myUserId},
             );
             });
             Door = 'Door is Locked.';
@@ -177,8 +176,6 @@ class HidePageState extends State<HidePage> {
         TextButton.icon(
           onPressed: ()async{
             await supabase
-              .from('action')
-              .insert({'text': 'Lock','number':565656});
             showDialog<void>(
             context: context,
             builder: (_) {
