@@ -61,11 +61,6 @@ class LoginPageState extends State<LoginPage> {
       // 今年の西暦を取得
       int thisYear = now.year;
       int month = now.month;
-      if (month <= 3){
-        int thisYear = now.year - 1;
-      }else{
-        int thisYear = now.year;
-      }
       int secondYear = thisYear  - 1;
       int thirdYear = thisYear - 2;
       int lasYear = thisYear - 3;
