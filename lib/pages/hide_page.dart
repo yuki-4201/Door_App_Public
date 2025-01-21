@@ -48,6 +48,7 @@ class AlertDialogSample extends StatelessWidget {
         ElevatedButton(
           child: Text('解錠する'),
           onPressed: () async {
+            await supabase;
             final channelB = supabase.channel('admin');
             channelB.subscribe((status, error) {
             if (status != RealtimeSubscribeStatus.subscribed) {
@@ -148,6 +149,7 @@ class HidePageState extends State<HidePage> {
         const SizedBox(height: 30),
         TextButton.icon(
           onPressed: ()async{
+            await supabase;
             final channelB = supabase.channel('admin');
             channelB.subscribe((status, error) {
             if (status != RealtimeSubscribeStatus.subscribed) {
