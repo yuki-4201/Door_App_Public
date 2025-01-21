@@ -29,7 +29,7 @@ class HidePage extends StatefulWidget {
   State<HidePage> createState() => HidePageState();
 }
 
-class AlertDialogSample extends StatelessWidget {
+class AlertDialogSample extends StatelessWidget (myUserId){
   const AlertDialogSample({Key? key}) : super(key: key);
 
   @override
@@ -179,7 +179,7 @@ class HidePageState extends State<HidePage> {
             showDialog<void>(
             context: context,
             builder: (_) {
-              return AlertDialogSample();
+              return AlertDialogSample(myUserId);
             });
             Door = 'Finish Action.';
             setState((){});
