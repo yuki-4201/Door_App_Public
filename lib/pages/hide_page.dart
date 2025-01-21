@@ -138,7 +138,7 @@ class HidePageState extends State<HidePage> {
       body: Column(
         mainAxisAlignment : MainAxisAlignment.center,
         children: <Widget>[
-        Text("Administrator",
+        Text("Teacher page",
           style: const TextStyle(
             fontSize: 35,
             color: Colors.blue
