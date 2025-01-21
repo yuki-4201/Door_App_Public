@@ -44,49 +44,11 @@ class LoginPageState extends State<LoginPage> {
       _passwordController.text = password;
     }
   }
-
-  Future<void> _signIn() async {
-    setState(() {
-      _isLoading = true;
-    });
-    try {
-      await supabase.auth.signInWithPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      // Save login info
-      await storage.write(key: 'email', value: _emailController.text);
-      await storage.write(key: 'password', value: _passwordController.text);
-      DateTime now = DateTime.now();
-      // 今年の西暦を取得
-      int thisYear = now.year;
-      int nextYear = thisYear - 1;
-      int lastYear = thisYear - 2;
-      int secondYear = thisYear - 3;
-      // Navigate to home page
-      // ignore: use_build_context_synchronously
-      if(_emailController.text.endsWith(lastYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(thisYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(nextYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(secondYear.toString() +"@kenryo.ed.jp")){
-        Navigator.of(context)
-          .pushAndRemoveUntil(HomePage.route(), (route) => false);
-      }else if(_emailController.text.endsWith("@kenryo.ed.jp")){
-        Navigator.of(context)
-          .pushAndRemoveUntil(HidePage.route(), (route) => false);
-      }else{
-        context.showErrorSnackBar(message: "kenryo.ed.jpのメールアドレスを入力してください。");
-      }
-    } on AuthException catch (error) {
-      // ignore: use_build_context_synchronously
-      context.showErrorSnackBar(message: error.message);
-    } catch (_) {
-      // ignore: use_build_context_synchronously
-      context.showErrorSnackBar(message: unexpectedErrorMessage);
-    }
-    if (mounted) {
-      setState(() {
-        _isLoading = false;
-      });
-    }
+  Future<void> signInWithEmail() async {
+  final AuthResponse res = await supabase.auth.signinwithotp(email: 'valid.email@supabase.io');
   }
+
+  
 
   @override
   void dispose() {
