@@ -37,9 +37,7 @@ class AlertDialogSample extends StatefulWidget {
   _AlertDialogSampleState createState() => _AlertDialogSampleState();
 }
 
-class _AlertDialogSample extends StatelessWidget {
-  const AlertDialogSample({Key? key, required this.myUserId}) : super(key: key);
-
+class _AlertDialogSample extends State<AlertDialogSample> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
