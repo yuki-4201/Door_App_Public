@@ -77,6 +77,7 @@ class HomePageState extends State<HomePage> {
             fontSize: 35,
             color: Colors.blue
           ),
+        ),
         TextButton.icon(
           onPressed: ()async{
             await supabase
