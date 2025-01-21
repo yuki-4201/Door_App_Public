@@ -109,7 +109,7 @@ class HomePageState extends State<HomePage> {
         TextButton.icon(
           onPressed: () {
           Navigator.of(context).pushAndRemoveUntil(
-            AuthenticationPage.route(data: myUserId), // データを渡す
+            AuthenticationPage.route(data: myUserId.toString()), // データを渡す
             (route) => false,
             );
           },
