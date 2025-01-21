@@ -30,7 +30,6 @@ class HidePage extends StatefulWidget {
 }
 
 class AlertDialogSample extends StatelessWidget {
-  final myUserId = supabase.auth.currentUser!.email;
   const AlertDialogSample({Key? key}) : super(key: key);
 
   @override
@@ -69,6 +68,7 @@ class AlertDialogSample extends StatelessWidget {
 }
 
 class HidePageState extends State<HidePage> {
+  final myUserId = supabase.auth.currentUser!.email;
   // ignore: non_constant_identifier_names
   String Door = "Select the operation.";
   int _counter = 0;
