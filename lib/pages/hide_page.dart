@@ -66,7 +66,7 @@ class HidePageState extends State<HidePage> {
         ListTile(
           title: const Text('Log_Search'),
           onTap: (){
-            final url = Uri.parse('https://docs.google.com/spreadsheets/d/1ZOGaawYWA1fQg_ULgRasc-IO_01mwRQ4vZedu4WeAA8/edit?gid=1834174406#gid=1834174406');
+            final url = Uri.parse('https://docs.google.com/spreadsheets/d/12Af-CYHNuHjuGCYOe6s2MxAkNgear0b2IncT_OXPEYA/edit?usp=sharing');
             launchUrl(url);
           },
         ),
