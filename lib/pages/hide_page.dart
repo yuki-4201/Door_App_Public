@@ -28,9 +28,17 @@ class HidePage extends StatefulWidget {
   @override
   State<HidePage> createState() => HidePageState();
 }
+class AlertDialogSample extends StatefulWidget {
+  final String myUserId;
 
-class AlertDialogSample extends StatelessWidget (myUserId){
-  const AlertDialogSample({Key? key}) : super(key: key);
+  const AlertDialogSample({Key? key, required this.myUserId}) : super(key: key);
+
+  @override
+  _AlertDialogSampleState createState() => _AlertDialogSampleState();
+}
+
+class _AlertDialogSample extends StatelessWidget {
+  const AlertDialogSample({Key? key, required this.myUserId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
