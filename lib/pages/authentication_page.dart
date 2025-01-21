@@ -27,7 +27,6 @@ class AuthenticationPage extends StatefulWidget {
 }
 
 class AuthenticationPageState extends State<AuthenticationPage> {
-  NextPage(this.myUserId);
   String myUserId;
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
