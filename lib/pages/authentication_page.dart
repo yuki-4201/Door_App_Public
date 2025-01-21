@@ -26,6 +26,7 @@ class AuthenticationPage extends StatefulWidget {
   State<AuthenticationPage> createState() => AuthenticationPageState();
 }
 class AuthenticationPageState extends State<AuthenticationPage> {
+  final _emailController = TextEditingController();
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final auth_number = TextEditingController();
@@ -75,7 +76,7 @@ class AuthenticationPageState extends State<AuthenticationPage> {
             // Send a message once the client is subscribed
             channelB.sendBroadcastMessage(
               event: 'RequestForUnlocking',
-              payload: {'payload': message, 'user':'student'},
+              payload: {'payload': message, 'user':myUserId},
             );
             });
             print("45");
