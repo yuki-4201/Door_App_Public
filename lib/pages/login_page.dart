@@ -63,7 +63,7 @@ class LoginPageState extends State<LoginPage> {
       int month = now.month;
       int secondYear = thisYear  - 1;
       int thirdYear = thisYear - 2;
-      int lasYear = thisYear - 3;
+      int lastYear = thisYear - 3;
       RegExp regex = RegExp(r"^[^@]+(\d{" + lastYear.length + "})@kenryo\.ed\.jp$");
       regex = regex.replaceFirstMapped(RegExp(r"\d{" + lastYear.length + "}"), (Match match) {
         return r"[1-9]\d{0," + (lastYear.length - 1) + "}|\d{" + (lastYear.length - 1) + "}";
