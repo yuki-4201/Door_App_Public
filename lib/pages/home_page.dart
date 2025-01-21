@@ -11,6 +11,7 @@ import 'package:login/utils/constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 // ignore: unused_import
 import 'package:login/pages/authentication_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// 他のユーザーとチャットができるページ
 ///
