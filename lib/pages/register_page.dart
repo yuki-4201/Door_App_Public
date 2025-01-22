@@ -61,7 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
             TextFormField(
               controller: _emailController,
               decoration: const InputDecoration(
-                label: Text('メールアドレス'),
+                label: Text('メールアドレス(縣陵メールのみ)'),
               ),
               validator: (val) {
                 if (val == null || val.isEmpty) {
@@ -77,14 +77,14 @@ class _RegisterPageState extends State<RegisterPage> {
               controller: _passwordController,
               obscureText: true,
               decoration: const InputDecoration(
-                label: Text('パスワード'),
+                label: Text('パスワード(8文字以上)'),
               ),
               validator: (val) {
                 if (val == null || val.isEmpty) {
                   return '必須';
                 }
-                if (val.length < 6) {
-                  return '6文字以上';
+                if (val.length < 8) {
+                  return '8文字以上';
                 }
                 return null;
               },
@@ -92,7 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
             formSpacer,
             ElevatedButton.icon(
               onPressed: _isLoading ? null : _signUp,
-              label: const Text('登録'),
+              label: const Text('登録して確認メールを送信'),
               icon: const Icon(Icons.how_to_reg),
             ),
             formSpacer,
