@@ -29,44 +29,8 @@ class HidePage extends StatefulWidget {
   State<HidePage> createState() => HidePageState();
 }
 
-class AlertDialogSample extends StatelessWidget {
-  const AlertDialogSample({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('解錠してもいいですか？'),
-      content: Text('学校外で解錠操作を行なっていませんか？'),
-      actions: <Widget>[
-        ElevatedButton(
-          child: Text('解錠しない'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        ElevatedButton(
-          child: Text('解錠する'),
-          onPressed: () async {
-            final channelB = supabase.channel('admin');
-            channelB.subscribe((status, error) {
-            if (status != RealtimeSubscribeStatus.subscribed) {
-              return;
-            }
-            // Send a message once the client is subscribed
-            channelB.sendBroadcastMessage(
-              event: 'RequestForUnlocking',
-              payload: {'payload': 9999, 'user':'teacher'},
-            );
-            Navigator.of(context).pop();
-            });
-          },
-        )
-      ],
-    );
-  }
-}
-
 class HidePageState extends State<HidePage> {
+  final myUserId = supabase.auth.currentUser!.email;
   // ignore: non_constant_identifier_names
   String Door = "Select the operation.";
   int _counter = 0;
@@ -82,7 +46,7 @@ class HidePageState extends State<HidePage> {
       appBar: AppBar(
         title: const Row(children: [
             Icon(Icons.sensor_door),
-            Text("Kenryo Lab Application")
+            Text("KERYO STEAM LAB.")
         ]),
       ),
       drawer: Drawer(
@@ -100,15 +64,9 @@ class HidePageState extends State<HidePage> {
           ),
         ),
         ListTile(
-          title: Text('TeacherPage'),
-          onTap: () => {Navigator.of(context)
-            .pushAndRemoveUntil(HidePage.route(), (route) => false)
-          },
-        ),
-        ListTile(
           title: const Text('Log_Search'),
           onTap: (){
-            final url = Uri.parse('https://docs.google.com/spreadsheets/d/1ZOGaawYWA1fQg_ULgRasc-IO_01mwRQ4vZedu4WeAA8/edit?gid=1834174406#gid=1834174406');
+            final url = Uri.parse('https://docs.google.com/spreadsheets/d/12Af-CYHNuHjuGCYOe6s2MxAkNgear0b2IncT_OXPEYA/edit?usp=sharing');
             launchUrl(url);
           },
         ),
@@ -120,7 +78,14 @@ class HidePageState extends State<HidePage> {
           },
         ),
         ListTile(
-          title: const Text('KenryoArchive'),
+          title: const Text('KenryoArchive(iOS)'),
+          onTap: (){
+            final url = Uri.parse('https://apps.apple.com/jp/app/%E7%B8%A3%E9%99%B5%E6%8E%A2%E7%A9%B6%E3%82%A2%E3%83%BC%E3%82%AB%E3%82%A4%E3%83%96/id6738385612');
+            launchUrl(url);
+          },
+        ),
+        ListTile(
+          title: const Text('KenryoArchive(Google Drive)'),
           onTap: (){
             final url = Uri.parse('https://drive.google.com/drive/folders/0AG2mAiSF-9WuUk9PVA');
             launchUrl(url);
@@ -138,7 +103,7 @@ class HidePageState extends State<HidePage> {
       body: Column(
         mainAxisAlignment : MainAxisAlignment.center,
         children: <Widget>[
-        Text("TeacherPage",
+        Text("Teacher page",
           style: const TextStyle(
             fontSize: 35,
             color: Colors.blue
@@ -147,9 +112,7 @@ class HidePageState extends State<HidePage> {
         const SizedBox(height: 30),
         TextButton.icon(
           onPressed: ()async{
-            await supabase
-              .from('action')
-              .insert({'text': 'Lock','number':424242});
+            await supabase;
             final channelB = supabase.channel('admin');
             channelB.subscribe((status, error) {
             if (status != RealtimeSubscribeStatus.subscribed) {
@@ -158,7 +121,7 @@ class HidePageState extends State<HidePage> {
             // Send a message once the client is subscribed
             channelB.sendBroadcastMessage(
               event: 'RequestForLocking',
-              payload: {'payload': 424242, 'user':'teacher'},
+              payload: {'payload': 424242, 'user':myUserId, 'group':'teacher'},
             );
             });
             Door = 'Door is Locked.';
@@ -176,15 +139,19 @@ class HidePageState extends State<HidePage> {
         ),
         TextButton.icon(
           onPressed: ()async{
-            await supabase
-              .from('action')
-              .insert({'text': 'Lock','number':565656});
-            showDialog<void>(
-            context: context,
-            builder: (_) {
-              return AlertDialogSample();
+            await supabase;
+            final channelB = supabase.channel('admin');
+            channelB.subscribe((status, error) {
+            if (status != RealtimeSubscribeStatus.subscribed) {
+              return;
+            }
+            // Send a message once the client is subscribed
+            channelB.sendBroadcastMessage(
+              event: 'RequestForUnlocking',
+              payload: {'payload': 9999, 'user':myUserId, 'group':'teacher'},
+            );
             });
-            Door = 'Finish Action.';
+            Door = 'Door is Unlocked.';
             setState((){});
           },
           icon: const Icon(
@@ -214,7 +181,7 @@ class HidePageState extends State<HidePage> {
         Container(
           alignment: Alignment.bottomCenter,
           width: double.infinity,
-          child: const Text("made by Kenryo Physics and Chemistry Club")
+          child: const Text("Made By Hinata Misawa, Kotaro Otsuka in 2024 ©")
         ),
       ],),
       floatingActionButton:
