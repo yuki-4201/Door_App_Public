@@ -11,6 +11,7 @@ import 'package:login/utils/constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 // ignore: unused_import
 import 'package:login/pages/authentication_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// 他のユーザーとチャットができるページ
 ///
@@ -28,6 +29,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  final myUserId = supabase.auth.currentUser!.email;
   // ignore: non_constant_identifier_names
   String Door = "Select the operation.";
   int _counter = 0;
@@ -37,13 +39,13 @@ class HomePageState extends State<HomePage> {
       _counter++;
     });
   }
-  @override
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Row(children: [
             Icon(Icons.sensor_door),
-            Text("Kenryo Lab Application")
+            Text("KERYO STEAM LAB.")
         ]),
       ),
       drawer: Drawer(
@@ -61,6 +63,27 @@ class HomePageState extends State<HomePage> {
           ),
         ),
         ListTile(
+          title: const Text('KenyroHP'),
+          onTap: (){
+            final url = Uri.parse('https://kenryo.ed.jp');
+            launchUrl(url);
+          },
+        ),
+        ListTile(
+          title: const Text('KenryoArchive(iOS)'),
+          onTap: (){
+            final url = Uri.parse('https://apps.apple.com/jp/app/%E7%B8%A3%E9%99%B5%E6%8E%A2%E7%A9%B6%E3%82%A2%E3%83%BC%E3%82%AB%E3%82%A4%E3%83%96/id6738385612');
+            launchUrl(url);
+          },
+        ),
+        ListTile(
+          title: const Text('KenryoArchive(Google Drive)'),
+          onTap: (){
+            final url = Uri.parse('https://drive.google.com/drive/folders/0AG2mAiSF-9WuUk9PVA');
+            launchUrl(url);
+          },
+        ),
+        ListTile(
           title: Text('Logout'),
           onTap: () => {Navigator.of(context)
           .pushAndRemoveUntil(LoginPage.route(), (route) => false)
@@ -72,11 +95,15 @@ class HomePageState extends State<HomePage> {
       body: Column(
         mainAxisAlignment : MainAxisAlignment.center,
         children: <Widget>[
+        Text("Student page",
+          style: const TextStyle(
+            fontSize: 35,
+            color: Colors.blue
+          ),
+        ),
         TextButton.icon(
           onPressed: ()async{
-            await supabase
-              .from('action')
-              .insert({'text': 'Lock','number':424242});
+            await supabase;
             final channelB = supabase.channel('admin');
             channelB.subscribe((status, error) {
             if (status != RealtimeSubscribeStatus.subscribed) {
@@ -85,7 +112,7 @@ class HomePageState extends State<HomePage> {
             // Send a message once the client is subscribed
             channelB.sendBroadcastMessage(
               event: 'RequestForLocking',
-              payload: {'payload': 424242, 'user':'student'},
+              payload: {'payload': 424242, 'user':myUserId, 'group':'student'},
             );
             });
             Door = 'Door is Locked.';
@@ -102,12 +129,11 @@ class HomePageState extends State<HomePage> {
           ),
         ),
         TextButton.icon(
-          onPressed: ()async{Navigator.of(context)
-            .pushAndRemoveUntil(AuthenticationPage.route(), (route) => false);
-            Door = 'Door is Unlocked.';
-            await supabase
-              .from('action')
-              .insert({'text': 'Unlock Request','number':565656});
+          onPressed: () {
+          Navigator.of(context).pushAndRemoveUntil(
+            AuthenticationPage.route(data: myUserId.toString()), // データを渡す
+            (route) => false,
+            );
           },
           icon: const Icon(
             Icons.lock_open,
@@ -136,7 +162,7 @@ class HomePageState extends State<HomePage> {
         Container(
           alignment: Alignment.bottomCenter,
           width: double.infinity,
-          child: const Text("made by Kenryo Physics and Chemistry Club")
+          child: const Text("Made By Hinata Misawa, Kotaro Otsuka in 2024 ©")
         ),
       ],),
       floatingActionButton:
