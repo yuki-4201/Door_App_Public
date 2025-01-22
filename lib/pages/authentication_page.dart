@@ -15,13 +15,16 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 
 class AuthenticationPage extends StatefulWidget {
-  // ignore: use_super_parameters
-  const AuthenticationPage({Key? key}) : super(key: key);
-  static Route<void> route() {
+  final String data;
+
+  const AuthenticationPage({Key? key, required this.data}) : super(key: key);
+
+  static Route<void> route({required String data}) {
     return MaterialPageRoute(
-      builder: (context) => const AuthenticationPage(),
+      builder: (context) => AuthenticationPage(data: data),
     );
   }
+
   @override
   State<AuthenticationPage> createState() => AuthenticationPageState();
 }
@@ -29,6 +32,13 @@ class AuthenticationPageState extends State<AuthenticationPage> {
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final auth_number = TextEditingController();
+  late String myUserId;
+
+  @override
+  void initState() {
+    super.initState();
+    myUserId = widget.data; // 受け取ったデータを myUserId に代入
+  }
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -75,7 +85,7 @@ class AuthenticationPageState extends State<AuthenticationPage> {
             // Send a message once the client is subscribed
             channelB.sendBroadcastMessage(
               event: 'RequestForUnlocking',
-              payload: {'payload': message, 'user':'student'},
+              payload: {'payload': message, 'user':myUserId, 'group':'student'},
             );
             });
             print("45");
