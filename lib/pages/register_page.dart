@@ -77,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
               controller: _passwordController,
               obscureText: true,
               decoration: const InputDecoration(
-                label: Text('パスワード(8文字以上)'),
+                label: Text('パスワード(英数混合8文字以上)'),
               ),
               validator: (val) {
                 if (val == null || val.isEmpty) {
