@@ -9,6 +9,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:login/pages/home_page.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:login/pages/hide_page.dart';
+import 'package:login/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   // ignore: use_super_parameters
@@ -43,7 +44,7 @@ class LoginPageState extends State<LoginPage> {
       _passwordController.text = password;
     }
   }
-
+  
   Future<void> _signIn() async {
     setState(() {
       _isLoading = true;
@@ -59,15 +60,28 @@ class LoginPageState extends State<LoginPage> {
       DateTime now = DateTime.now();
       // 今年の西暦を取得
       int thisYear = now.year;
-      int nextYear = thisYear + 1;
-      int lastYear = thisYear - 1;
-      int secondYear = thisYear + 2;
+      int month = now.month;
+      if(month <= 3){
+        thisYear -= 1;
+      }
+      int secondYear = thisYear  - 1;
+      int thirdYear = thisYear - 2;
+      int lastYear = thisYear - 3;
+      final email = _emailController.text;
+      final regex = RegExp(r'(\d{4})@kenryo\.ed\.jp$');
+      final match = regex.firstMatch(email);
+      
       // Navigate to home page
       // ignore: use_build_context_synchronously
-      if(_emailController.text.endsWith(lastYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(thisYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(nextYear.toString() +"@kenryo.ed.jp") || _emailController.text.endsWith(secondYear.toString() +"@kenryo.ed.jp")){
-        Navigator.of(context)
-          .pushAndRemoveUntil(HomePage.route(), (route) => false);
-      }else if(_emailController.text.endsWith("@kenryo.ed.jp") || _emailController.text == "test@test.com"){
+      if(match != null){
+        final year = int.parse(match.group(1)!);
+        if (email.endsWith(thisYear.toString() + "@kenryo.ed.jp") || email.endsWith(secondYear.toString() + "@kenryo.ed.jp") || email.endsWith(thirdYear.toString() + "@kenryo.ed.jp")) {
+            Navigator.of(context)
+              .pushAndRemoveUntil(HomePage.route(), (route) => false);
+        }else{  
+          context.showErrorSnackBar(message: "卒業生または存在しないアカウントは使用できません。");
+        }
+      }else if(_emailController.text.endsWith("@kenryo.ed.jp")){
         Navigator.of(context)
           .pushAndRemoveUntil(HidePage.route(), (route) => false);
       }else{
@@ -86,6 +100,8 @@ class LoginPageState extends State<LoginPage> {
       });
     }
   }
+
+  
 
   @override
   void dispose() {
@@ -118,6 +134,14 @@ class LoginPageState extends State<LoginPage> {
             label: const Text('ログイン'),
             icon: const Icon(Icons.login),
           ),
+          formSpacer,
+          ElevatedButton.icon(
+              onPressed: () {
+                Navigator.of(context).push(RegisterPage.route());
+              },
+              label: const Text('登録'),
+              icon: const Icon(Icons.how_to_reg),
+          )
         ],
       ),
     );
