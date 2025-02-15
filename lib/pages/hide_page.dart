@@ -1,25 +1,12 @@
-// ignore: unused_import
-// ignore_for_file: unused_field, sort_child_properties_last, prefer_const_constructors, unused_import, duplicate_ignore
-
-// ignore: unused_import
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:login/pages/home_page.dart';
-import 'package:login/pages/login_page.dart';
-// ignore: unused_import
-import 'package:login/utils/constants.dart';
-// ignore: unused_import
 import 'package:supabase_flutter/supabase_flutter.dart';
-// ignore: unused_import
-import 'package:login/pages/authentication_page.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:login/pages/login_page.dart';
+import 'package:login/utils/constants.dart';
 
-/// 他のユーザーとチャットができるページ
-///
-/// `ListView`内にチャットが表示され、下の`TextField`から他のユーザーへチャットを送信できる。
+
 class HidePage extends StatefulWidget {
-  // ignore: use_super_parameters
-  const HidePage({Key? key}) : super(key: key);
+  const HidePage({super.key});
   static Route<void> route() {
     return MaterialPageRoute(
       builder: (context) => const HidePage(),
@@ -33,13 +20,6 @@ class HidePageState extends State<HidePage> {
   final myUserId = supabase.auth.currentUser!.email;
   // ignore: non_constant_identifier_names
   String Door = "Select the operation.";
-  int _counter = 0;
-  // ignore: unused_element
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +32,7 @@ class HidePageState extends State<HidePage> {
       drawer: Drawer(
     child: ListView(
       children: [
-        DrawerHeader(
+        const DrawerHeader(
           child: Center(
             child: Text(
               'Menu',
@@ -99,7 +79,7 @@ class HidePageState extends State<HidePage> {
           },
         ),
         ListTile(
-          title: Text('Logout'),
+          title: const Text('Logout'),
           onTap: () => {Navigator.of(context)
           .pushAndRemoveUntil(LoginPage.route(), (route) => false)
           },
@@ -110,8 +90,8 @@ class HidePageState extends State<HidePage> {
       body: Column(
         mainAxisAlignment : MainAxisAlignment.center,
         children: <Widget>[
-        Text("Teacher page",
-          style: const TextStyle(
+        const Text("Teacher page",
+          style: TextStyle(
             fontSize: 35,
             color: Colors.blue
           ),
@@ -119,7 +99,6 @@ class HidePageState extends State<HidePage> {
         const SizedBox(height: 30),
         TextButton.icon(
           onPressed: ()async{
-            await supabase;
             final channelB = supabase.channel('admin');
             channelB.subscribe((status, error) {
             if (status != RealtimeSubscribeStatus.subscribed) {
@@ -146,7 +125,6 @@ class HidePageState extends State<HidePage> {
         ),
         TextButton.icon(
           onPressed: ()async{
-            await supabase;
             final channelB = supabase.channel('admin');
             channelB.subscribe((status, error) {
             if (status != RealtimeSubscribeStatus.subscribed) {

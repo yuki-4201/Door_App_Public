@@ -1,16 +1,13 @@
-# login
+# Smart Door System
 
-A new Flutter project.
 
-## Getting Started
+### 概要
+このプロジェクトはRaspberry Piを用いて安価でカスタマイズ性の高いスマートロックシステムの実現を目的として活動してきました。このプロジェクトはユーザーが利用するwebアプリを作成します。
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+### バージョン情報
+> ##### ver1.0.0
+> レポジトリの作成
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Copyright @yuki-4201 2025 All rights reserved

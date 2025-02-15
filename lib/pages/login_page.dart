@@ -3,13 +3,12 @@
 //import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:login/pages/register_page.dart';
-import 'package:login/utils/constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:login/pages/home_page.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:login/pages/hide_page.dart';
+import 'package:login/utils/constants.dart';
 import 'package:login/pages/register_page.dart';
+import 'package:login/pages/home_page.dart';
+import 'package:login/pages/hide_page.dart';
 
 class LoginPage extends StatefulWidget {
   // ignore: use_super_parameters
@@ -66,7 +65,6 @@ class LoginPageState extends State<LoginPage> {
       }
       int secondYear = thisYear  - 1;
       int thirdYear = thisYear - 2;
-      int lastYear = thisYear - 3;
       final email = _emailController.text;
       final regex = RegExp(r'(\d{4})@kenryo\.ed\.jp$');
       final match = regex.firstMatch(email);
@@ -74,7 +72,6 @@ class LoginPageState extends State<LoginPage> {
       // Navigate to home page
       // ignore: use_build_context_synchronously
       if(match != null){
-        final year = int.parse(match.group(1)!);
         if (email.endsWith(thisYear.toString() + "@kenryo.ed.jp") || email.endsWith(secondYear.toString() + "@kenryo.ed.jp") || email.endsWith(thirdYear.toString() + "@kenryo.ed.jp")) {
             Navigator.of(context)
               .pushAndRemoveUntil(HomePage.route(), (route) => false);

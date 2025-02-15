@@ -1,15 +1,5 @@
-// ignore: unused_import
-// ignore_for_file: unused_field, avoid_print, non_constant_identifier_names
-
-// ignore: unused_import
-import 'dart:async';
 import 'package:flutter/material.dart';
-// ignore: unused_import
-import 'package:login/main.dart';
 import 'package:login/pages/home_page.dart';
-// ignore: unused_import
-import 'package:login/utils/constants.dart';
-// ignore: unused_import
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 
@@ -17,7 +7,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class AuthenticationPage extends StatefulWidget {
   final String data;
 
-  const AuthenticationPage({Key? key, required this.data}) : super(key: key);
+  const AuthenticationPage({super.key, required this.data});
 
   static Route<void> route({required String data}) {
     return MaterialPageRoute(
@@ -31,7 +21,7 @@ class AuthenticationPage extends StatefulWidget {
 class AuthenticationPageState extends State<AuthenticationPage> {
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
-  final auth_number = TextEditingController();
+  final authNumber = TextEditingController();
   late String myUserId;
 
   @override
@@ -42,7 +32,7 @@ class AuthenticationPageState extends State<AuthenticationPage> {
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    auth_number.dispose(); super.dispose();
+    authNumber.dispose(); super.dispose();
   }
   final supabase = Supabase.instance.client;
 
@@ -66,7 +56,7 @@ class AuthenticationPageState extends State<AuthenticationPage> {
         ),
         TextFormField(
           keyboardType: TextInputType.number,
-          controller: auth_number,
+          controller: authNumber,
           decoration: const InputDecoration(
             border: UnderlineInputBorder(),
             labelText: 'Enter number.',
@@ -74,7 +64,7 @@ class AuthenticationPageState extends State<AuthenticationPage> {
         ),
         TextButton.icon(
           onPressed: ()async{
-            final message = auth_number.text;
+            final message = authNumber.text;
             final channelB = supabase.channel('admin');
             channelB.subscribe((status, error) {
             // Wait for successful connection
@@ -88,7 +78,6 @@ class AuthenticationPageState extends State<AuthenticationPage> {
               payload: {'payload': message, 'user':myUserId, 'group':'student'},
             );
             });
-            print("45");
             Navigator.of(context)
             .pushAndRemoveUntil(HomePage.route(), (route) => false);
             setState((){});

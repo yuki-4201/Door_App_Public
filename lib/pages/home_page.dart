@@ -13,9 +13,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:login/pages/authentication_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-/// 他のユーザーとチャットができるページ
-///
-/// `ListView`内にチャットが表示され、下の`TextField`から他のユーザーへチャットを送信できる。
 class HomePage extends StatefulWidget {
   // ignore: use_super_parameters
   const HomePage({Key? key}) : super(key: key);
@@ -110,7 +107,6 @@ class HomePageState extends State<HomePage> {
         ),
         TextButton.icon(
           onPressed: ()async{
-            await supabase;
             final channelB = supabase.channel('admin');
             channelB.subscribe((status, error) {
             if (status != RealtimeSubscribeStatus.subscribed) {
