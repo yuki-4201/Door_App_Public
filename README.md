@@ -1,4 +1,4 @@
-# Smart Door System
+# Door_App_Public
 
 
 ### 概要
@@ -12,5 +12,3 @@
 > ##### ver1.0.0
 > レポジトリの作成
 
-
-Copyright @yuki-4201 2025 All rights reserved
