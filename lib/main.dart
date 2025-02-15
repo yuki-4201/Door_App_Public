@@ -3,22 +3,23 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:login/pages/login_page.dart';
 
+
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  // .envを読み込めるように設定.
   await dotenv.load(fileName: '.env');
   await Supabase.initialize(
-    url: dotenv.get('LET_URL'), // .envのURLを取得.
-    anonKey: dotenv.get('LET_ANONKEY'), // .envのanonキーを取得.
+    url: dotenv.get('LET_URL'),
+    anonKey: dotenv.get('LET_ANONKEY'),
   );
   runApp(const MyApp());
 }
 
+
 final supabase = Supabase.instance.client;
 
+
 class MyApp extends StatelessWidget {
-  // ignore: use_super_parameters
-  const MyApp({Key? key}): super(key: key);
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
@@ -36,20 +38,25 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
   }
+
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -64,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',

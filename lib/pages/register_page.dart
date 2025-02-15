@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:login/utils/constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:login/pages/login_page.dart';
+import 'package:login/utils/constants.dart';
 
 class RegisterPage extends StatefulWidget {
-  // ignore: use_super_parameters
-  const RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key});
 
   static Route<void> route({bool isRegistering = false}) {
     return MaterialPageRoute(
@@ -19,9 +18,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final bool _isLoading = false;
-
   final _formKey = GlobalKey<FormState>();
-
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _usernameController = TextEditingController();
@@ -37,12 +34,9 @@ class _RegisterPageState extends State<RegisterPage> {
     try {
       await supabase.auth.signUp(
           email: email, password: password, data: {'username': username});
-      //     .pushAndRemoveUntil(ChatPage.route(), (route) => false);
     } on AuthException catch (error) {
-      // ignore: use_build_context_synchronously
       context.showErrorSnackBar(message: error.message);
     } catch (error) {
-      // ignore: use_build_context_synchronously
       context.showErrorSnackBar(message: unexpectedErrorMessage);
     }
   }
@@ -73,6 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
               keyboardType: TextInputType.emailAddress,
             ),
             formSpacer,
+
             TextFormField(
               controller: _passwordController,
               obscureText: true,
@@ -90,12 +85,14 @@ class _RegisterPageState extends State<RegisterPage> {
               },
             ),
             formSpacer,
+
             ElevatedButton.icon(
               onPressed: _isLoading ? null : _signUp,
               label: const Text('登録して確認メールを送信'),
               icon: const Icon(Icons.how_to_reg),
             ),
             formSpacer,
+
             ElevatedButton.icon(
               onPressed: () {
                 Navigator.of(context).push(LoginPage.route());
